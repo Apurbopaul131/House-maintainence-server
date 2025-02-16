@@ -23,6 +23,9 @@ const blockedUserByAdminIntoDB = async (
   if (!isUserExist) {
     throw new AppError(404, 'User not found!');
   }
+  if (isUserExist && isUserExist.role !== 'user') {
+    throw new AppError(403, 'You may provided admin id!');
+  }
   //check if user is already blocked
   if (isUserExist.isBlocked) {
     throw new AppError(403, 'User is already blocked!');
@@ -60,6 +63,7 @@ const deletedBlogByAdminIntoDB = async (
   const result = await Blog.findByIdAndDelete(blogId);
   return result;
 };
+
 export const AdminServices = {
   blockedUserByAdminIntoDB,
   deletedBlogByAdminIntoDB,
