@@ -26,6 +26,7 @@ class QueryBuilder<T> {
   }
   sort() {
     const sortBy = this.query?.sortBy && this.query?.sortBy;
+
     const sortOrder = this.query?.sortOrder && this.query?.sortOrder;
     if (
       (sortBy === 'createdAt' || sortBy === 'title') &&

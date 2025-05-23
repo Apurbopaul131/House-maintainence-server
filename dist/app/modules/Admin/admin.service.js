@@ -31,6 +31,9 @@ const blockedUserByAdminIntoDB = (authenticateUserInfo, userId) => __awaiter(voi
     if (!isUserExist) {
         throw new AppError_1.default(404, 'User not found!');
     }
+    if (isUserExist && isUserExist.role !== 'user') {
+        throw new AppError_1.default(403, 'You may provided admin id!');
+    }
     //check if user is already blocked
     if (isUserExist.isBlocked) {
         throw new AppError_1.default(403, 'User is already blocked!');
