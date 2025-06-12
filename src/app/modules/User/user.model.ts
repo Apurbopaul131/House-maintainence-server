@@ -8,8 +8,8 @@ import { TUser, UserModel } from './user.interface';
 const userSchema = new Schema<TUser, UserModel>(
   {
     name: {
-      type: String,
-      required: [true, 'Name is required.'],
+      firstName: { type: String, required: true },
+      lastName: { type: String, required: true },
     },
     email: {
       type: String,
@@ -23,7 +23,7 @@ const userSchema = new Schema<TUser, UserModel>(
     role: {
       type: String,
       enum: { values: role, message: '{VALUE} is not supported' },
-      default: 'user',
+      default: 'customer',
     },
     isBlocked: {
       type: Boolean,

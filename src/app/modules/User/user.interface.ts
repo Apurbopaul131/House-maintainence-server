@@ -2,9 +2,12 @@
 import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
-export type TRole = 'admin' | 'user';
+export type TRole = 'admin' | 'customer';
 export interface TUser {
-  name: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
   email: string;
   password: string;
   role?: TRole;

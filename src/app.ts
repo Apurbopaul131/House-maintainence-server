@@ -3,9 +3,9 @@ import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
 import globalErrorHandler from './app/middlewires/globalError';
 import notFound from './app/middlewires/notFound';
-import { AdminRoutes } from './app/modules/Admin/admin.route';
+
 import { AuthRoutes } from './app/modules/Auth/auth.route';
-import { BlogRoutes } from './app/modules/Blog/blog.route';
+import { BookingsRoutes } from './app/modules/Bookings/bookings.route';
 
 const app: Application = express();
 
@@ -15,11 +15,9 @@ app.use(cors());
 app.use(cookieParser());
 
 //Auth Route
-app.use('/api', AuthRoutes);
-//Blog Route
-app.use('/api', BlogRoutes);
-//Admin Route
-app.use('/api', AdminRoutes);
+app.use('/api/v1', AuthRoutes);
+//Booking routes
+app.use('/api/v1', BookingsRoutes);
 //checking route
 app.get('/', (req: Request, res: Response) => {
   res.send('Connected successfully.');

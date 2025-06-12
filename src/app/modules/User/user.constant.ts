@@ -1,6 +1,7 @@
-export const role = ['admin', 'user'];
+export const role = ['admin', 'customer'];
+export const bookingStatus = ['pending', 'confirmed', 'completed', 'cancelled'];
 export const USER_ROLE = {
-  user: 'user',
+  customer: 'customer',
   admin: 'admin',
 } as const;
 export type TUserRole = keyof typeof USER_ROLE;
