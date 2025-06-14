@@ -4,7 +4,10 @@ import sendResponse from '../../uitls/sendResponse';
 import { BookingServices } from './bookings.service';
 
 const createServiceBooking = catchAsync(async (req: Request, res: Response) => {
-  const result = await BookingServices.createServiceBookingIntoDB(req?.body);
+  const result = await BookingServices.createServiceBookingIntoDB(
+    req.user?.userId,
+    req?.body,
+  );
   //send response to client
   sendResponse(res, {
     success: true,

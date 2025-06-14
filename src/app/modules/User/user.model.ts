@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import { model, Schema } from 'mongoose';
 import config from '../../config';
 import AppError from '../../error/AppError';
-import { role } from './user.constant';
 import { TUser, UserModel } from './user.interface';
 
 const userSchema = new Schema<TUser, UserModel>(
@@ -11,24 +10,16 @@ const userSchema = new Schema<TUser, UserModel>(
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
     },
-    email: {
-      type: String,
-      required: [true, 'Email is required'],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, 'Password is required.'],
-    },
-    role: {
-      type: String,
-      enum: { values: role, message: '{VALUE} is not supported' },
-      default: 'customer',
-    },
-    isBlocked: {
-      type: Boolean,
-      default: false,
-    },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['admin', 'customer'], default: 'customer' },
+    isBlocked: { type: Boolean, default: false },
+    streetAddress: { type: String },
+    streetAddressLineTwo: { type: String },
+    city: { type: String },
+    state: { type: String },
+    postal: { type: Number },
+    phoneNumber: { type: String },
   },
   {
     timestamps: true,

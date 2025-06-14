@@ -1,22 +1,34 @@
+import AppError from '../../error/AppError';
 import { User } from '../User/user.model';
-import { IBooking } from './booings.interface';
 import { BookingModel } from './bookings.model';
 
-const createServiceBookingIntoDB = async (payload: IBooking) => {
-  const isUserExist = await User.findOne({ email: payload?.email });
-  if (!isUserExist) {
-    const userData = {
-      name: {
-        firstName: payload?.name?.firstName,
-        lastName: payload?.name?.lastName,
-      },
-      email: payload?.email,
-      password: '12345678',
-    };
-    await User.create(userData);
+const createServiceBookingIntoDB = async (userId: string, payload: any) => {
+  console.log(payload);
+  const {
+    name,
+    streetAddress,
+    streetAddressLineTwo,
+    city,
+    state,
+    postal,
+    ...bookingData
+  } = payload;
+  console.log(bookingData);
+  console.log(userId);
+  const existUser = await User.findById(userId);
+  if (!existUser) {
+    throw new AppError(403, 'user not exist');
   }
-  const result = await BookingModel.create(payload);
-  return result;
+  await User.findByIdAndUpdate(userId, {
+    name,
+    streetAddress,
+    streetAddressLineTwo,
+    city,
+    state,
+    postal,
+  });
+  const booingsResult = await BookingModel.create(bookingData);
+  return booingsResult;
 };
 export const BookingServices = {
   createServiceBookingIntoDB,

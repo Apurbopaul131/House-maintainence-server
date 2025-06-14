@@ -4,15 +4,6 @@ import { IBooking } from './booings.interface';
 
 const bookingSchema = new Schema<IBooking>(
   {
-    name: {
-      firstName: { type: String, required: true },
-      lastName: { type: String, required: true },
-    },
-    streetAddress: { type: String, required: true },
-    streetAddress2: { type: String },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    postal: { type: String, required: true },
     email: { type: String, required: true },
     message: { type: String },
     date: { type: Date, required: true },

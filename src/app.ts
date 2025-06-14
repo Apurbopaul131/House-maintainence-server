@@ -6,6 +6,8 @@ import notFound from './app/middlewires/notFound';
 
 import { AuthRoutes } from './app/modules/Auth/auth.route';
 import { BookingsRoutes } from './app/modules/Bookings/bookings.route';
+import { HomeServiceRoutes } from './app/modules/Service/service.route';
+import { UploadRoutes } from './app/modules/Uploader/uploader.route';
 
 const app: Application = express();
 
@@ -18,10 +20,14 @@ app.use(cookieParser());
 app.use('/api/v1', AuthRoutes);
 //Booking routes
 app.use('/api/v1', BookingsRoutes);
+//serviceApi
+app.use('/api/v1', HomeServiceRoutes);
+app.use('/api/v1', UploadRoutes);
 //checking route
 app.get('/', (req: Request, res: Response) => {
   res.send('Connected successfully.');
 });
+
 //global error handler
 app.use(globalErrorHandler);
 
